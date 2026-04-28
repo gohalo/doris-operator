@@ -18,11 +18,12 @@
 package mysql
 
 import (
-	_ "github.com/go-sql-driver/mysql"
-	"k8s.io/klog/v2"
 	"sort"
 	"strconv"
 	"strings"
+
+	_ "github.com/go-sql-driver/mysql"
+	"k8s.io/klog/v2"
 )
 
 const (
@@ -50,6 +51,7 @@ type Frontend struct {
 	ErrMsg             string  `json:"err_msg" db:"ErrMsg"`
 	Version            *string `json:"version" db:"Version"`
 	CurrentConnected   string  `json:"current_connected" db:"CurrentConnected"`
+	LiveSince          string  `json:"live_since" db:"LiveSince"`
 }
 
 type Backend struct {
@@ -81,6 +83,8 @@ type Backend struct {
 	NodeRole                string  `json:"node_role" db:"NodeRole"`
 	CpuCores                string  `json:"cpu_cores" db:"CpuCores"`
 	Memory                  string  `json:"memory" db:"Memory"`
+	RunningTasks            int     `json:"running_tasks" db:"RunningTasks"`
+	LiveSince               string  `json:"live_since" db:"LiveSince"`
 }
 
 // BuildSeqNumberToFrontendMap
